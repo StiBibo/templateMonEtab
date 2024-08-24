@@ -1,0 +1,45 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilisateur - MonEtab</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
+</head>
+<body>
+    {% block header %}
+    
+    {% endblock header %}
+
+    <div class="main-container">
+        {% block content %}
+        
+        {% endblock content %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script>
+        function notif(){
+            Swal.fire({
+            title: "Etes vous sur de supprimer ?",
+            icon: "question",
+            iconHtml: "?",
+            confirmButtonText: "Oui",
+            cancelButtonText: "Non",
+            showCancelButton: true,
+            showCloseButton: true
+        });
+        }
+    </script>
+</body>
+</html>

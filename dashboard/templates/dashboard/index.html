@@ -1,0 +1,53 @@
+{% extends "dashboard/sidebar.html" %}
+
+{% block header %}
+
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-pencil-alt"></i>MonEtab</h1>
+            <ul>
+                <li><a href="{% url 'dashboard:dashboard' %}"><i class="fas fa-tachometer-alt" ></i> Tableau de bord</a></li>
+                <li><a href="{% url 'student:student_list' %}" class="active"><i class="fas fa-book-reader" ></i> Elèves</a></li>
+                <li><a href="{% url 'teacher:list_teacher' %}"><i class="fas fa-chalkboard-teacher" ></i> Professeurs</a></li>
+                <li><a href="{% url 'user:list_user' %}"><i class="fas fa-user" ></i> Utilisateurs</a></li>
+                <li><a href="{% url 'rapport:rapport' %}"><i class="fas fa-file-alt" ></i> Rapport</a></li>
+                <li><a href="index.html"><i class="fas fa-sign-out-alt" style="color: rgb(248, 59, 75);"></i> Déconnexion</a></li>
+            </ul>
+        </div>
+    </header>
+
+{% endblock header %}
+
+{% block content %}
+
+    <div class="main">
+        <h2>Tableau de bord </h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <i class="fas fa-book-reader icon"></i>
+                    <h3>Nombre d'élève: <span id="artisanCount">128 100</span></h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <i class="fas fa-chalkboard-teacher icon"></i>
+                    <h3>Nombre de professeur: <span id="clientCount">128 100</span></h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <i class="fas fa-user icon"></i>
+                    <h3>Nombre d'utilisateur: <span id="clientCount">128 100</span></h3>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <i class="fas fa-user icon"></i>
+                    <h3>Elève par genre: <span id="clientCount">0</span></h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
