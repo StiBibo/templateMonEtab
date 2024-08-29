@@ -1,4 +1,4 @@
-{% extends "teacher/sidebar.html" %}
+{% extends "sidebar.html" %}
 
 
 {% block header %}
@@ -45,30 +45,34 @@
                         <th>Ville</th>
                         <th>Actions</th>
                     </tr>
-                </thead>
+                </thead> 
                 <tbody>
-                    <tr>
-                        <td>Kouakou</td>
-                        <td>George</td>
-                        <td>Math</td>
-                        <td>Non</td>
-                        <td>25</td>
-                        <td>0123456789</td>
-                        <td>Touba</td>
-                        <td><a href="{% url 'teacher:update_teacher' %}" class="modifier"> Modifier</a><a onclick="notif()" class="supprimer">Supprimer</a></td>
-                    </tr>
+                    {% if teachers %}
+                        {% for teacher in teachers %}
 
-                    <tr>
-                        <td>Atta</td>
-                        <td>Sali</td>
-                        <td>Physique</td>
-                        <td>Oui</td>
-                        <td>22</td>
-                        <td>0123456789</td>
-                        <td>Abidjan</td>
-                        <td><a href="{% url 'teacher:update_teacher' %}" class="modifier"> Modifier</a><a onclick="notif()" class="supprimer">Supprimer</a></td>
-                    </tr>
-                    <!-- Ajouter d'autres lignes pour plus d'artisans -->
+                            <tr>
+                                <td>{{ teacher.first_name }}</td>
+                                <td>{{ teacher.last_name }}</td>
+                                <td>{{ teacher.matiere }}</td>
+                                <td>{{ teacher.vacant }}</td>
+                                <td>{{ teacher.date_de_naissance }}</td>
+                                <td>{{ teacher.numero_de_telephone }}</td>
+                                <td>{{ teacher.ville }}</td>
+                                <td><a href="{% url 'teacher:update_teacher' teacher.id %}" class="modifier"> Modifier</a><a onclick="notif({{teacher.id}})" class="supprimer">Supprimer</a></td>
+                            </tr>
+                        
+                        {% endfor %}
+                    
+                    {% else %}
+                            <tr>
+                                <td>
+                                    <h1>
+                                        No Informations Yet
+                                    </h1>
+                                </td>
+                            </tr>
+                    {% endif %}
+                    
                 </tbody>
             </table>
         </div>
@@ -78,4 +82,28 @@
 </div>
 
 {% endblock content %}
+
+{% block notif_javascript %}
+    <script>
+        function notif(teacher){
+            const deleteUrl = "{% url 'teacher:delete_teacher' 0 %}".replace('0', teacher); 
+            Swal.fire({
+            title: "Etes vous sur de supprimer ?",
+            icon: "question",
+            iconHtml: "?",
+            confirmButtonText: `Oui`,
+            cancelButtonText: "Non",
+            showCancelButton: true,
+            showCloseButton: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = deleteUrl;  // Redirect to the dynamically generated URL
+            }
+        });
+        }
+    </script>
+
+    
+
+{% endblock notif_javascript %}
 

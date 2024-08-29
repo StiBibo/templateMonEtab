@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+from django.contrib.auth.models import User
 
 
 class UserForms(forms.Form):
@@ -11,6 +12,6 @@ class UserForms(forms.Form):
 class UserFormsModel(forms.ModelForm):
     class Meta:
         model = User 
-        # fields = "__all__"
+        fields = "__all__"
         exclude = ["created_at"]
 

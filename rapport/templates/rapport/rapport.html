@@ -1,35 +1,28 @@
-{% extends "rapport/sidebar.html" %}
+{% extends "sidebar.html" %}
 {% load static %}
  
-{% block title %}
-
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Tableau de bord - MonEtab</title>
-        <link rel="stylesheet" href="{% static 'css/style.css' %}">
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-        
-    </head>
-
-{% endblock title %}
 
 
-{% block headerRapport %}
-   <h1><i class="fas fa-pencil-alt"></i>MonEtab</h1>
-   <ul>
-       <li><a href="{% url 'dashboard:dashboard' %}"><i class="fas fa-tachometer-alt" ></i> Tableau de bord</a></li>
-       <li><a href="{% url 'student:student_list' %}" class="active"><i class="fas fa-book-reader" ></i> Elèves</a></li>
-       <li><a href="{% url 'teacher:list_teacher' %}"><i class="fas fa-chalkboard-teacher" ></i> Professeurs</a></li>
-       <li><a href="{% url 'user:list_user' %}"><i class="fas fa-user" ></i> Utilisateurs</a></li>
-       <li><a href="{% url 'rapport:rapport' %}"><i class="fas fa-file-alt" ></i> Rapport</a></li>
-       <li><a href="index.html"><i class="fas fa-sign-out-alt" style="color: rgb(248, 59, 75);" ></i> Déconnexion</a></li>
-   </ul>
-{% endblock headerRapport %}
+{% block header %}
+
+    <header>
+        <div class="container">
+            <h1><i class="fas fa-pencil-alt"></i>MonEtab</h1>
+            <ul>
+                <li><a href="{% url 'dashboard:dashboard' %}"><i class="fas fa-tachometer-alt" ></i> Tableau de bord</a></li>
+                <li><a href="{% url 'student:student_list' %}" class="active"><i class="fas fa-book-reader" ></i> Elèves</a></li>
+                <li><a href="{% url 'teacher:list_teacher' %}"><i class="fas fa-chalkboard-teacher" ></i> Professeurs</a></li>
+                <li><a href="{% url 'user:list_user' %}"><i class="fas fa-user" ></i> Utilisateurs</a></li>
+                <li><a href="{% url 'rapport:rapport' %}"><i class="fas fa-file-alt" ></i> Rapport</a></li>
+                <li><a href="index.html"><i class="fas fa-sign-out-alt" style="color: rgb(248, 59, 75);"></i> Déconnexion</a></li>
+            </ul>
+        </div>
+    </header>
+
+{% endblock header %}
 
 
-{% block insideContainer %}
+{% block content %}
 
     <div class="main">
         <div class="row">
@@ -55,6 +48,6 @@
         </div>
     </div>
 
-{% endblock insideContainer %}
+{% endblock content %}
 
 

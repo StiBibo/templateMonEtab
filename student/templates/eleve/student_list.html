@@ -1,4 +1,4 @@
-{% extends "eleve/sidebar.html" %}
+{% extends "sidebar.html" %}
 
 {% block header %}
 
@@ -47,29 +47,35 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Koffi</td>
-                            <td>George</td>
-                            <td>M</td>
-                            <td>Tle</td>
-                            <td>GDJ7GDGD</td>
-                            <td>25</td>
-                            <td>0123456789</td>
-                            <td>Bonoua</td>
-                            <td><a href="{% url 'student:update_student' %}" class="modifier"> Modifier</a><a onclick="notif()" class="supprimer">Supprimer</a></td>
-                        </tr>
+                        {% if students %}
 
-                        <tr>
-                            <td>Koné</td>
-                            <td>Sali</td>
-                            <td>F</td>
-                            <td>2nd</td>
-                            <td>GDJ7GDGB</td>
-                            <td>22</td>
-                            <td>0123456789</td>
-                            <td>Abidjan</td>
-                            <td><a href="{% url 'student:update_student' %}" class="modifier"> Modifier</a><a onclick="notif()" class="supprimer">Supprimer</a></td>
-                        </tr>
+                            {% for student in students %}
+                                <tr>
+                                
+                                    <td>{{ student.first_name}}</td>
+                                    <td>{{ student.last_name}}</td>
+                                    <td>{{ student.sexe}}</td>
+                                    <td>{{ student.classe}}</td>
+                                    <td>{{ student.matricule}}</td>
+                                    <td>{{ student.date_naissance}}</td>
+                                    <td>{{ student.numero_telephone}}</td>
+                                    <td>{{ student.ville}}</td>
+                                    <td><a href="{% url 'student:update_student' student.id %}" class="modifier"> Modifier</a><a onclick="notif({{ student.id }})" class="supprimer">Supprimer</a></td>
+                                </tr>
+                            {% endfor %}
+                                 
+                            
+                        {% else %}
+                            <tr>
+                                <td>
+                                    <h1>
+                                        No Informations Yet
+                                    </h1>
+                                </td>
+                            </tr>
+                        {% endif %}
+                        
+
                         <!-- Ajouter d'autres lignes pour plus d'artisans -->
                     </tbody>
                 </table>
@@ -78,3 +84,25 @@
     </div>
 
 {% endblock content %}
+
+{% block notif_javascript %}
+<script>
+    function notif(teacher){
+        const deleteUrl = "{% url 'student:delete_student' 0 %}".replace('0', teacher); 
+        Swal.fire({
+        title: "Etes vous sur de supprimer ?",
+        icon: "question",
+        iconHtml: "?",
+        confirmButtonText: `Oui`,
+        cancelButtonText: "Non",
+        showCancelButton: true,
+        showCloseButton: true
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.href = deleteUrl;  // Redirect to the dynamically generated URL
+        }
+    });
+    }
+</script>
+
+{% endblock notif_javascript %}

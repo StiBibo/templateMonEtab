@@ -16,3 +16,7 @@ class Teacher(models.Model):
     matiere = models.CharField(max_length=25,choices=matiere)
     numero_de_telephone = models.CharField(max_length=15)
     ville = models.CharField(max_length=15)
+    vacant = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name} : matiere de {self.matiere}'
